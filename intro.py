@@ -9,7 +9,10 @@ def introspection_info(obj):
     else:
         print('Объект не имеет атрибутов')
     print(f'Список методов объекта: {[met[0] for met in inspect.getmembers(obj, predicate=inspect.ismethod)]}')
-    print(f'Модуль-источник объекта: {inspect.getmodule(obj).__name__}')  # имя модуля, из которого взят объект
+    try:
+        print(f'Модуль-источник объекта: {inspect.getmodule(obj).__name__}')  # имя модуля, из которого взят объект
+    except AttributeError:
+        print('Объект не принадлежит какому-либо конкретному модулю')
 
 
 class test:  # тестовый класс
@@ -33,4 +36,4 @@ introspection_info(test_obj)
 
 print(' ')
 
-introspection_info(42)
+introspection_info('42')
